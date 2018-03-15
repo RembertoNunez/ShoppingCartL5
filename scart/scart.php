@@ -1,6 +1,6 @@
 <?php
-session_start();
 include 'functions.php';
+session_start();
 
 //If 'itemId' quantity has been sent, search for the item with that ID and update quantity
 if(isset($_POST['itemId'])) {
@@ -52,7 +52,9 @@ if(isset($_POST['removeId'])) {
                 <br /> <br /> <br />
                 <h2>Shopping Cart</h2>
                 <!-- Cart Items -->
-
+                <?php
+                    displayCart();
+                ?>
             </div>
         </div>
     </body>

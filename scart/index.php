@@ -1,41 +1,36 @@
 <?php
 include 'functions.php';
-if(!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = array();
-}
-//Checks to see if the form is submitted
-if(isset($_POST['itemName'])) {
-    // Creating an array to hold an item's properites.
-    $newItem = array();
-    $newItem['name'] = $_POST['itemName'];
-    $newItem['id'] = $_POST['itemId'];
-    $newItem['price'] = $_POST['itemPrice'];
-    $newItem['image'] = $_POST['itemImage'];
-    
-    //Storing the item array in the cart array
-    array_push($_SESSION['cart'], $newItem);
-    
-    //Check to see if other items with this id are in the array
-    //If so, this item isn't new. Only update quantity
-    //Must be passed by reference so that each item can be updated!;
-    foreach ($_SESSION['cart'] as &$item) {
-        if($newItem['id'] == $item['id']) {
-            $item['quantity'] += 1;
-            $found = true;
-        }
-    }
-    
-    // else add it to array
-    if($found != true) {
-        $newItem['quantity'] = 1;
-        array_push($_SESSION['cart'], $newItem);
-    }
-}
-if(isset($_GET['query'])) {
-    // Get access to our API function
-    include 'wmapi.php';
-    $items = getProducts($_GET['query']);
-}
+   
+   session_start();
+   
+   if(!isset($_SESSION['cart'])){
+       $_SESSION['cart'] = array();
+   }
+   
+   if(isset($_POST['itemName'])){
+       $newItem = array();
+       $newItem['name'] = $_POST['itemName'];
+       $newItem['id'] = $_POST['itemId'];
+       $newItem['price'] = $_POST['itemPrice'];
+       $newItem['image'] = $_POST['itemImage'];
+       
+       foreach($_SESSION['cart'] as &$item){
+           if ($newItem['id'] ==  $item['id']){
+               $item['quantity'] += 1;
+               $found = true;
+           }
+       }
+       
+       if($found != true){
+           $newItem['quantity'] = 1;
+           array_push($_SESSION['cart'], $newItem);
+       }
+   }
+   
+   if(isset($_GET['query'])) {
+       include 'wmapi.php';
+       $items = getProducts($_GET['query']);
+   }
 ?>
 <!DOCTYPE html>
 <html>

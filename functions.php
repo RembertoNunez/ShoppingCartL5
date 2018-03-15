@@ -13,7 +13,7 @@ function displayResults() {
             // Display item as table row
             echo "<tr>";
             echo "<td><img src='$itemImage'></td>";
-            echo "<td><h4>$itemImage</h4></td>";
+            echo "<td><h4>$itemName</h4></td>";
             echo "<td><h4>$$itemPrice</h4></td>";
             
             // Hidden input element containing the item name
@@ -22,8 +22,6 @@ function displayResults() {
             echo "<input type='hidden' name='itemId' value='$itemId'>";
             echo "<input type='hidden' name='itemImage' value='$itemImage'>";
             echo "<input type='hidden' name='itemPrice' value='$itemPrice'>";
-
-            echo "<td><button class='btn btn-warning'>Add</button></td>";
             
             // Check to see if the msot recent POST request ahs the same itemId
             // If so, this item was just added to the cart. Display different button.

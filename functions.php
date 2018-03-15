@@ -4,14 +4,14 @@ function displayResults() {
     global $items;
     if(isset($items)) {
         echo "<table class = 'table'>";
-        foreach($itemsa as $item) {
+        foreach($items as $item) {
             $itemName = $item['name'];
             $itemPrice = $item['salePrice'];
             $itemImage = $item['thumbnailImage'];
             $itemId = $item['itemId'];
             
             // Display item as table row
-            echo '<tr>';
+            echo "<tr>";
             echo "<td><img src='$itemImage'></td>";
             echo "<td><h4>$itemImage</h4></td>";
             echo "<td><h4>$$itemPrice</h4></td>";
@@ -24,18 +24,17 @@ function displayResults() {
             echo "<input type='hidden' name='itemPrice' value='$itemPrice'>";
 
             echo "<td><button class='btn btn-warning'>Add</button></td>";
-            echo "</form>";
             
             // Check to see if the msot recent POST request ahs the same itemId
             // If so, this item was just added to the cart. Display different button.
             if($_POST['itemId'] == $itemId) {
-                echo '<td><button class="btn btn-success">Added</button></td>';
+                echo "<td><button class='btn btn-success'>Added</button></td>";
             }
             else {
-                echo '<td><button class="btn btn-warning">Add</button></td>';
+                echo "<td><button class='btn btn-warning'>Add</button></td>";
 
             }
-            
+            echo "</form>";
             echo "</tr>";
         }
         echo "</table>";
